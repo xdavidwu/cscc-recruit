@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<h2>TODO List</h2>
+		<div class="outercont">
+		</div>
+		<input type="button" class="addnew" value="Add new"/>
+		<style>
+			.donetext {
+				text-decoration: line-through;
+			}
+		</style>
+		<script>
+			$("input.addnew").on("click",function(){
+				todoitem=$("<div>",{"class":"todoitem"});
+				donebox=$("<input>",{"class":"donebox",type:"checkbox"});
+				donebox.on("click",function(){
+					if($(this).prop("checked"))$(this).parent().children("input.todotext").addClass("donetext");
+					else $(this).parent().children("input.todotext").removeClass("donetext");
+				});
+				todotext=$("<input>",{"class":"todotext",type:"text"});
+				removebtn=$("<input>",{"class":"removebtn",type:"button",value:"Remove"});
+				removebtn.on("click",function(){
+					$(this).parent().remove();
+				});
+				todoitem.append(donebox,todotext,removebtn);
+				$("div.outercont").append(todoitem);
+			});
+		</script>
+	</body>
+</html>
