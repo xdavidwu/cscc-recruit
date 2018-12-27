@@ -1,17 +1,91 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>TODO List</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
 		<h2>TODO List</h2>
-		<div class="outercont">
+		<div class="card">
+			<div class="outercont">
+			</div>
+			<input type="button" class="addnew" value="Add new"/>
 		</div>
-		<input type="button" class="addnew" value="Add new"/>
 		<style>
-			.donetext {
-				text-decoration: line-through;
-			}
+@font-face {
+	font-family: 'Roboto Mono';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Roboto Mono'), local('RobotoMono-Regular'), url(https://fonts.gstatic.com/s/robotomono/v5/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2) format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+	font-family: 'Comfortaa';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Comfortaa Regular'), local('Comfortaa-Regular'), url(https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFq.woff2) format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+div.card {
+	border-radius: 2px;
+	background-color: white;
+	box-shadow: 0 1px 1px 0 rgba(60,64,67,.08),0 1px 3px 1px rgba(60,64,67,.16);
+	padding: 16px;
+	overflow: auto;
+}
+body {
+	background-color: #FAFAFA;
+	padding: 8px;
+}
+h2 {
+	position: sticky;
+	font-family: 'Comfortaa', cursive;
+	line-height: 24px;
+	top: 0;
+	margin: -16px;
+	margin-bottom: 16px;
+	padding: 24px;
+	padding-left: 32px;
+	color: white;
+	background-color: #3F51B5;
+	box-shadow: 0 2px 4px rgba(0,0,0,.5);
+	font-size: 20px;
+	letter-spacing: 1px;
+}
+div.todoitem {
+	padding: 8px 0;
+}
+input.todotext {
+	outline: none;
+	margin: 0 16px;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	border-bottom-width: 2px;
+	border-bottom-color: #3F51B5;
+	background-color: transparent;
+	color: rgb(73, 80, 96);
+	line-height: 16px;
+}
+input.donetext {
+	text-decoration: line-through;
+	color: #787878;
+}
+input[type^="button"] {
+	border-radius: 2px;
+	box-shadow: 0 1px 1px 0 rgba(60,64,67,.08),0 1px 3px 1px rgba(60,64,67,.16);
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 14px;
+	line-height: 16px;
+	padding: 8px 16px;
+	background-color: #3F51B5;
+	border-width: 0;
+}
+input[type^="button"]:hover {
+	box-shadow: 0 1px 3px 1px rgba(60,64,67,.2),0 2px 8px 4px rgba(60,64,67,.1);
+}
 		</style>
 		<script>
 			$("input.addnew").on("click",function(){
@@ -22,7 +96,7 @@
 					else $(this).parent().children("input.todotext").removeClass("donetext");
 				});
 				todotext=$("<input>",{"class":"todotext",type:"text"});
-				removebtn=$("<input>",{"class":"removebtn",type:"button",value:"Remove"});
+				removebtn=$('<svg height="16px" width="16px"><line x1="2" y1="2" x2="13" y2="13" style="stroke:#787878; stroke-width:2" /><line x1="2" y1="13" x2="13" y2="2" style="stroke:#787878; stroke-width:2" /></svg>',{"class":"removebtn"});
 				removebtn.on("click",function(){
 					$(this).parent().remove();
 				});
