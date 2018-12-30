@@ -11,6 +11,12 @@
 			<div class="outercont">
 			</div>
 			<input type="button" class="addnew" value="Add new"/>
+			<input type="button" class="cleardone" value="Clear done"/>
+			<select id="filter">
+				<option value="all">All</option>
+				<option value="done">Done</option>
+				<option value="undone">To do</option>
+			</select>
 		</div>
 		<style>
 @font-face {
@@ -54,7 +60,7 @@ h2 {
 	letter-spacing: 1px;
 }
 div.todoitem {
-	padding: 8px 0;
+	margin-bottom: 16px;
 }
 input.todotext {
 	outline: none;
@@ -80,6 +86,7 @@ input[type^="button"] {
 	font-size: 14px;
 	line-height: 16px;
 	padding: 8px 16px;
+	margin-right: 8px;
 	background-color: #3F51B5;
 	border-width: 0;
 }
@@ -88,21 +95,38 @@ input[type^="button"]:hover {
 }
 		</style>
 		<script>
+			function refreshvis(){
+				val=$("option:selected").val();
+				if(val==="all") $("div.todoitem").show();
+				else if(val==="done"){
+					$("div.todoitem").hide();
+					$("input:checked").parent().show();
+				}
+				else if(val==="undone"){
+					$("div.todoitem").show();
+					$("input:checked").parent().hide();
+				}
+			}
 			$("input.addnew").on("click",function(){
 				todoitem=$("<div>",{"class":"todoitem"});
 				donebox=$("<input>",{"class":"donebox",type:"checkbox"});
 				donebox.on("click",function(){
 					if($(this).prop("checked"))$(this).parent().children("input.todotext").addClass("donetext");
 					else $(this).parent().children("input.todotext").removeClass("donetext");
+					refreshvis();
 				});
 				todotext=$("<input>",{"class":"todotext",type:"text"});
-				removebtn=$('<svg height="16px" width="16px"><line x1="2" y1="2" x2="13" y2="13" style="stroke:#787878; stroke-width:2" /><line x1="2" y1="13" x2="13" y2="2" style="stroke:#787878; stroke-width:2" /></svg>',{"class":"removebtn"});
+				removebtn=$('<svg height="16px" width="16px"><line x1="2" y1="2" x2="13" y2="13" style="stroke:#e0e0e0; stroke-width:2" /><line x1="2" y1="13" x2="13" y2="2" style="stroke:#e0e0e0; stroke-width:2" /></svg>',{"class":"removebtn"});
 				removebtn.on("click",function(){
 					$(this).parent().remove();
 				});
 				todoitem.append(donebox,todotext,removebtn);
 				$("div.outercont").append(todoitem);
 			});
+			$("input.cleardone").on("click",function(){
+				$("input:checked").parent().remove();
+			});
+			$("select").on("change",refreshvis);
 		</script>
 	</body>
 </html>
