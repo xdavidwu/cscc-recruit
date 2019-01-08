@@ -21,3 +21,5 @@ todo.html: the web page
 ### Howto
 
 open in browser _with internet connection_ (for jquery)
+
+or go [here](https://xdavidwu.github.io/cscc-recruit/todo.html)
